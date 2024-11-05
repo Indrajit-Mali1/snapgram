@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Textarea, toast, useToast } from "../ui"
+import { Textarea, useToast } from "../ui"
 import FileUploader from "../shared/FileUploader"
 import { PostValidation } from "@/lib/validation"
 import { Models } from "appwrite"
@@ -18,8 +18,8 @@ type PostFormProps = {
 }
 
 const PostForm = ({post, action}: PostFormProps) => {
-  const {mutateAsync: createPost, isPending: isLoadingCreate} = useCreatePost();
-  const {mutateAsync: updatePost, isPending: isLoadingUpdate} = useUpdatePost();
+  const {mutateAsync: createPost, isLoading: isLoadingCreate} = useCreatePost();
+  const {mutateAsync: updatePost, isLoading: isLoadingUpdate} = useUpdatePost();
   const {user} = useUserContext();
   const {toast} = useToast();
   const navigate = useNavigate();

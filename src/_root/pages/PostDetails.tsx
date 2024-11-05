@@ -6,7 +6,6 @@ import PostStats from "@/components/shared/PostStats";
 
 import {
   useGetPostById,
-  useGetUserPosts,
   useDeletePost,
 } from "@/lib/react-query/queriesAndMutations";
 import { multiFormatDateString } from "@/lib/utils";
@@ -18,14 +17,10 @@ const PostDetails = () => {
   const { user } = useUserContext();
 
   const { data: post, isLoading } = useGetPostById(id);
-  const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
-    post?.creator.$id
-  );
+
   const { mutate: deletePost } = useDeletePost();
 
-  const relatedPosts = userPosts?.documents.filter(
-    (userPost) => userPost.$id !== id
-  );
+
 
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
