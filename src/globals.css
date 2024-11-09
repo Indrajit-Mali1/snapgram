@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  /* transform: scale(0.8); */
+  /* transform-origin: top left; */
+  /* width: 125%;  Compensates for the scaling so that content doesn't overflow */
+}
+
 @layer base {
   * {
     @apply box-border list-none p-0 m-0 scroll-smooth;
