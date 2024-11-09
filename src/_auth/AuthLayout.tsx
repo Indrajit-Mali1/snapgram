@@ -1,7 +1,13 @@
 import { Outlet, Navigate } from 'react-router-dom';
 
 const AuthLayout = () => {
-  const isAuthenticated = false;
+  // const isAuthenticated = false;
+    const { isAuthenticated, isLoading } = useUserContext();
+
+  // Optionally, add a loading screen if auth state is being determined
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       {isAuthenticated ? (
