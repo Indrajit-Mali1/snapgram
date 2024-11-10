@@ -10,6 +10,7 @@ import {
 } from "@/lib/react-query/queriesAndMutations";
 import { multiFormatDateString } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
+import { useState } from "react";
 
 const PostDetails = () => {
   const navigate = useNavigate();
@@ -25,6 +26,12 @@ const PostDetails = () => {
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
     navigate(-1);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -52,7 +59,18 @@ const PostDetails = () => {
             src={post?.imageUrl}
             alt="creator"
             className="post_details-img"
+            onClick={toggleModal}
+            style={{ cursor: 'pointer' }}
           />
+          {isModalOpen && (
+            <div className="modal-container" onClick={toggleModal}>
+              <img
+                src={post?.imageUrl}
+                alt="Full Image"
+                className="modal-image"
+              />
+            </div>
+          )}
 
           <div className="post_details-info">
             <div className="flex-between w-full">
